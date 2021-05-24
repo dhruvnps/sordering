@@ -1,4 +1,4 @@
-var numbers = [...Array(60).keys()].map(x => ++x)
+var numbers = [...Array(40).keys()].map(x => ++x)
 
 function shuffle(arr) {
     var n = arr.length
@@ -25,8 +25,8 @@ class Visual {
             .data(numbers).enter()
             .append('rect')
             .attr('class', 'bars')
-            .attr('width', 19)
-            .attr('x', (d, i) => i * 20)
+            .attr('width', 25)
+            .attr('x', (d, i) => i * 30)
             .style('fill', 'grey')
     }
 
@@ -51,4 +51,4 @@ var sorter = new Bubble()
 numbers = sorter.sort(numbers)
 console.log(numbers)
 
-Visual.runstack(5)
+Visual.runstack(10)

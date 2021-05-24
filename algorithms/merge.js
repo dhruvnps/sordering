@@ -14,10 +14,12 @@ class Merge {
     sort(arr) {
         if (arr.length == 1) return arr
         var mid = Math.floor(arr.length / 2)
-        return this.merge(
+        var ret = this.merge(
             this.sort(arr.slice(0, mid)),
             this.sort(arr.slice(mid))
         )
+        Visual.numstack.push(ret)
+        return ret
     }
 
 }
