@@ -1,3 +1,3 @@
-# [Sorder](https://dhruvnps.github.io/sorder)
+# [Sortings](https://dhruvnps.github.io/sorder)
 
-> Sorting with bubbles
+> See sorting with bubbles
