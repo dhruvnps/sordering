@@ -1,5 +1,6 @@
 var items = new Items(20)
 
+
 Visual.init(items.list)
 Visual.draw(items.list)
 
