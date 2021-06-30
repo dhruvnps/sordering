@@ -1,21 +1,21 @@
 class Bubble {
 
-    sort(arr) {
-        arr = arr.slice()
-        var swapped = true,
-            n = arr.length
-        while (swapped) {
+    sort(items) {
+        var list = items.list
+        var length = items.list.length,
+            n = length
+        for (let i = 0; i < length; i++) {
             n--
-            swapped = false
             for (let i = 0; i < n; i++) {
-                if (arr[i] > arr[i + 1]) {
-                    [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
-                    swapped = true
+                if (list[i].val > list[i + 1].val) {
+                    items.swap(i, i + 1)
                 }
-                Visual.numstack.push(arr.slice())
+                if (i + 1 == n) {
+                    items.endItem(n)
+                }
             }
         }
-        return arr
+        items.endAll()
     }
 
 }
