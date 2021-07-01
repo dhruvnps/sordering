@@ -1,3 +1,7 @@
 # [Sortings](https://dhruvnps.github.io/sortings)
 
-> See sorting with bubbles
+Visualise sorting algorithms
+
+## Algorithms
+
+- Bubble sort
