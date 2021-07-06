@@ -5,3 +5,4 @@ Visualise sorting algorithms
 ## Algorithms
 
 - Bubble sort
+- Merge sort
