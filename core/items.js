@@ -1,10 +1,9 @@
 class Items {
 
-    constructor(length) {
+    constructor(length = 0) {
         this.list = []
-        for (let pos = 0; pos < length; pos++) {
-            var val = pos + 1
-            this.list.push(new Item(val, pos))
+        for (let idx = 0; idx < length; idx++) {
+            this.list.push(new Item(idx + 1))
         }
         this.shuffle()
     }
@@ -17,33 +16,44 @@ class Items {
         }
     }
 
+    getItem(idx) {
+        return this.list[idx]
+    }
+
+    addItem(item) {
+        this.list.push(item)
+    }
+
     swap(idx1, idx2) {
-        var tmp = this.list[idx1]
-        this.list[idx1] = this.list[idx2]
-        this.list[idx2] = tmp
-        tmp = this.list[idx1].pos
-        this.list[idx1].pos = this.list[idx2].pos
-        this.list[idx2].pos = tmp
+        var tmp = this.getItem(idx1).val
+        this.getItem(idx1).val = this.getItem(idx2).val
+        this.getItem(idx2).val = tmp
     }
 
     reset(...idxs) {
         for (var idx of idxs)
-            this.list[idx].highlight = false
+            this.getItem(idx).highlight = false
+    }
+
+    resetAll() {
+        for (var item of this.list)
+            item.highlight = false
     }
 
     compare(...idxs) {
         for (var idx of idxs)
-            this.list[idx].highlight = 'grey'
+            this.getItem(idx).highlight = 'grey'
     }
 
     illuminate(...idxs) {
+        var color = idxs.pop()
         for (var idx of idxs)
-            this.list[idx].highlight = 'mediumaquamarine'
+            this.getItem(idx).highlight = color
     }
 
     end(...idxs) {
         for (var idx of idxs)
-            this.list[idx].highlight = 'grey'
+            this.getItem(idx).highlight = 'grey'
     }
 
     endAll() {
@@ -57,9 +67,8 @@ class Items {
 }
 
 class Item {
-    constructor(val, pos) {
+    constructor(val) {
         this.val = val
-        this.pos = pos
         this.highlight = false
     }
 }

@@ -1,10 +1,10 @@
-var items = new Items(30)
+var items = new Items(50)
 
 Visual.init(items.list)
 Visual.draw(items.list)
 
-var sorter = new Bubble()
+var sorter = new Merge('coral')
+//var sorter = new Bubble('mediumaquamarine')
 sorter.sort(items)
-console.log(items);
 
-Visual.run(20)
+Visual.run(25)

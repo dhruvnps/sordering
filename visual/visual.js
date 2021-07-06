@@ -25,7 +25,7 @@ class Visual {
             .attr('hidden', false)
             .attr('height', d => 100 * d.val / list.length + '%')
             .attr('width', width + '%')
-            .attr('x', d => 50 + ((d.pos - list.length / 2) * width) + '%')
+            .attr('x', (d, i) => 50 + ((i - list.length / 2) * width) + '%')
             .style('fill', d => d.highlight ? d.highlight : 'dimgrey')
     }
 
