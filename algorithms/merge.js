@@ -5,6 +5,7 @@ class Merge {
     }
 
     sort(items) {
+        items.resetAll()
         items.list = this.mergesort(items, 0).list
         items.endAll()
         items.pushToNext()

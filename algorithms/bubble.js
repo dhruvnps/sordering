@@ -5,6 +5,8 @@ class Bubble {
     }
 
     sort(items) {
+        items.resetAll()
+
         var length = items.list.length,
             n = length,
             swapped = true
