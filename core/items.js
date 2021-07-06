@@ -16,12 +16,21 @@ class Items {
         }
     }
 
+    indexOf(item) {
+        return this.list.indexOf(item)
+    }
+
     getItem(idx) {
         return this.list[idx]
     }
 
     addItem(item) {
         this.list.push(item)
+    }
+
+    removeItem(item) {
+        var idx = this.list.indexOf(item)
+        this.list.splice(idx, 1)
     }
 
     swap(idx1, idx2) {

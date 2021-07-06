@@ -1,10 +1,39 @@
-var items = new Items(50)
+const delay = 20
 
-Visual.init(items.list)
-Visual.draw(items.list)
+var items = new Items(40)
 
-var sorter = new Merge('coral')
-//var sorter = new Bubble('mediumaquamarine')
-sorter.sort(items)
+Visual.init(items)
 
-Visual.run(25)
+var n = 0
+var sorters = [
+    new Bubble('mediumaquamarine'),
+    new Merge('coral'),
+]
+
+d3.select('h1').html(sorters[n].constructor.name)
+
+sorters[n].sort(items)
+Visual.run(delay)
+
+function prev() {
+    n = mod((n - 1), sorters.length)
+    runNew()
+}
+
+function next() {
+    n = mod((n + 1), sorters.length)
+    runNew()
+}
+
+function runNew() {
+    d3.select('h1').html(sorters[n].constructor.name)
+
+    items.shuffle()
+    Visual.stop()
+    sorters[n].sort(items)
+    Visual.run(delay)
+}
+
+function mod(n, m) {
+    return ((n % m) + m) % m
+}

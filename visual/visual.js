@@ -1,7 +1,8 @@
 class Visual {
 
-    static init(list) {
+    static init(items) {
         this.queue = []
+        this.timeouts = []
 
         this.svg = d3
             .select('.visual')
@@ -11,30 +12,40 @@ class Visual {
 
         this.bars = this.svg
             .selectAll()
-            .data(list).enter()
+            .data(items.list).enter()
             .append('rect')
             .attr('hidden', true)
             .style('stroke', 'black')
             .style('stroke-width', 1)
+
+        this.draw(items.list, 0)
     }
 
-    static draw(list) {
+    static draw(list, ms) {
         var width = 100 / list.length
         this.bars
             .data(list)
             .attr('hidden', false)
-            .attr('height', d => 100 * d.val / list.length + '%')
             .attr('width', width + '%')
             .attr('x', (d, i) => 50 + ((i - list.length / 2) * width) + '%')
             .style('fill', d => d.highlight ? d.highlight : 'dimgrey')
+            .transition().duration(ms)
+            .attr('height', d => 100 * d.val / list.length + '%')
     }
 
     static run(delay) {
         this.queue.forEach(function (list, idx) {
-            setTimeout(() => {
-                Visual.draw(list)
-            }, delay * idx)
+            Visual.timeouts.push(
+                setTimeout(() => {
+                    Visual.draw(list, 50)
+                }, delay * idx))
         })
+        this.queue = []
+    }
+
+    static stop() {
+        for (var timeout in this.timeouts) clearTimeout(timeout)
+        this.queue = []
     }
 
     static next(list) {

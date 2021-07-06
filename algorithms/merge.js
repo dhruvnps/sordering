@@ -17,7 +17,6 @@ class Merge {
 
         var left = new Items()
         var right = new Items()
-
         list.forEach(function (item, idx) {
             if (idx < list.length / 2) {
                 left.addItem(item)
@@ -34,46 +33,40 @@ class Merge {
 
     merge(left, right, start, main) {
         var result = new Items()
+        var idx = start
 
         while (left.list.length && right.list.length) {
             if (left.getItem(0).val <= right.getItem(0).val) {
-                result.addItem(left.getItem(0))
-                result.illuminate(result.list.length - 1, this.color)
-                left.list.shift()
+                this.step(main, left, result, idx++)
             } else {
-                result.addItem(right.getItem(0))
-                result.illuminate(result.list.length - 1, this.color)
-                right.list.shift()
+                this.step(main, right, result, idx++)
             }
-            this.updateMain(main, result, start)
-            result.end(result.list.length - 1)
         }
 
         while (left.list.length) {
-            result.addItem(left.getItem(0))
-            result.illuminate(result.list.length - 1, this.color)
-            left.list.shift()
-            this.updateMain(main, result, start)
-            result.end(result.list.length - 1)
+            this.step(main, left, result, idx++)
         }
         while (right.list.length) {
-            result.addItem(right.getItem(0))
-            result.illuminate(result.list.length - 1, this.color)
-            right.list.shift()
-            this.updateMain(main, result, start)
-            result.end(result.list.length - 1)
+            this.step(main, right, result, idx++)
         }
 
         result.resetAll()
         return result
     }
 
-    updateMain(main, result, start) {
-        main.list = main.list
-            .slice(0, start)
-            .concat(
-                result.list,
-                main.list.slice(start + result.list.length))
+    step(main, list, result, idx) {
+        result.addItem(list.getItem(0))
+        main.illuminate(main.indexOf(list.getItem(0)), this.color)
+        main.pushToNext()
+        result.illuminate(result.list.length - 1, this.color)
+        this.updateMain(main, list.getItem(0), idx)
+        list.list.shift()
+        result.end(result.list.length - 1)
+    }
+
+    updateMain(main, item, idx) {
+        main.removeItem(item)
+        main.list.splice(idx, 0, item)
         main.pushToNext()
     }
 
